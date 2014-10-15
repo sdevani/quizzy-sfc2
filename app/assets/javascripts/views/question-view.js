@@ -21,7 +21,7 @@ QuestionView.prototype.callback = function() {
   var view = this;
   $('.question-choice').click(function(e){
     if (view.currentQuestion === view.questions.length-1) {
-      // show score
+      $(document).trigger('post_score', view);
     } else { 
       var selected = $('input[type="radio"]:checked').val();
       // potentially make a method for below for code cleanliness
