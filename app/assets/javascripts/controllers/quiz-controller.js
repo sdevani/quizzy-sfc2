@@ -11,3 +11,8 @@ $(document).ready(function() {
   var qc = new QuizController();
   qc.start();
 });
+
+$(document).on('show_single-Quiz', function(e, id) {
+  new QuestionView('.current-question');
+  QuestionModel.all(id);
+});
