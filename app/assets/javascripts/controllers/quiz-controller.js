@@ -1,10 +1,14 @@
 var QuizController = function() {
-
+  this.quizView = new QuizAllView('.all-quizzes');
+  this.questionView = new QuestionView('.current-question');
+  $(this.questionView.el).hide();
+  $(this.quizView.el).hide();
 };
 
 QuizController.prototype.start = function() {
-  new QuizAllView('.all-quizzes');
   QuizModel.all();
+  $(this.questionView.el).hide();
+  $(this.quizView.el).show();
 };
 
 $(document).ready(function() {
@@ -13,6 +17,7 @@ $(document).ready(function() {
 });
 
 $(document).on('show_single-Quiz', function(e, id) {
-  new QuestionView('.current-question');
   QuestionModel.all(id);
+  $(this.questionView.el).show();
+  $(this.quizView.el).hide();
 });

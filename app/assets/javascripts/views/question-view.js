@@ -5,8 +5,6 @@ var QuestionView = function(el) {
   this.currentQuestion = 0;
   this.template = _.template($('.multiple-choice-question-template').html());
   $(document).on('got_da_questions', function(e, questionArray) {
-    $('.all-quizzes').hide();
-    $('.current-question').show();
     view.questions = questionArray;
     view.render(view.questions[view.currentQuestion]);
   });
@@ -22,18 +20,22 @@ QuestionView.prototype.render = function(question) {
 QuestionView.prototype.callback = function() {
   var view = this;
   $('.question-choice').click(function(e){
-    var selected = $('input[type="radio"]:checked').val();
-    if (selected === view.questions[view.currentQuestion].answer) {
-      view.correctAnswers++;
-      $('.validation').append('<p>CORRECT!!!!!!</p>');
-    } else {
-      $('.validation').append('<p>WRONGGGGG. SO WRONGGGGG. ARGH$@^@%@#%@</p>');
+    if (view.currentQuestion === view.questions.length-1) {
+      // show score
+    } else { 
+      var selected = $('input[type="radio"]:checked').val();
+      // potentially make a method for below for code cleanliness
+      if (selected === view.questions[view.currentQuestion].answer) {
+        view.correctAnswers++;
+        $('.validation').append('<p>CORRECT!!!!!!</p>');
+      } else {
+        $('.validation').append('<p>WRONGGGGG. SO WRONGGGGG. ARGH$@^@%@#%@</p>');
+      }
+      setTimeout(function() {
+        view.currentQuestion++;
+        view.render(view.questions[view.currentQuestion]);
+      } ,3000);
     }
-    view.currentQuestion++;
-    setTimeout(function() {
-      // $(document).trigger('got_da_questions',view.questions)
-      view.render(view.questions[view.currentQuestion]);
-    } ,3000);
   });
 };
 

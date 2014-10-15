@@ -3,8 +3,6 @@ var QuizAllView = function(el) {
   var view = this;
   this.template = _.template($('.all-quizzes-template').html());
   $(document).on('show_all_quizzes', function(e, quizArray) {
-    $('.current-question').hide();
-    $('.all-quizzes').show();
     $(this.el).empty();
     for (var i = 0; i < quizArray.length; i++) {
       view.render(quizArray[i]);
@@ -23,5 +21,5 @@ QuizAllView.prototype.callback = function() {
     var id = $(this).data('id');
     $(document).trigger('show_single-Quiz', id);
   });
-}
+};
 
