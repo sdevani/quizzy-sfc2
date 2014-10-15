@@ -2,10 +2,18 @@
   <h2 data-id='<%%= id %>'><%%= title %></h2>
 </script>
 
-
+<script type='text/template' class='multiple-choice-question-template'>
+  <h3><%%= question %></h3>
+  <%% _.each(choices, function(choice){ %>
+    <input type='radio' name='choice' value='<%%=choice%>'><%%= choice %><br>
+  <%% }) %>
+  <input type='submit' class='question-choice' value='Submit'>
+  <div class='validation'></div>
+</script>
 
 <h2>Quizzy Quizzzz</h2>
 
 
 <div class='all-quizzes'>
 </div>
+
