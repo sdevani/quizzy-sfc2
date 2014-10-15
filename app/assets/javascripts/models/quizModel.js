@@ -15,7 +15,7 @@ QuizModel.all = function() {
   $.get('/quizzes', function(data) {
     $.each(data, function(index, value) {
       quizArray.push(new QuizModel(value));
-    })
+    });
     $(document).trigger('show_all_quizzes', [quizArray]);
   });
 };

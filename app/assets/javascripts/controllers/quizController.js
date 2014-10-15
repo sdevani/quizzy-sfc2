@@ -8,6 +8,6 @@ QuizController.prototype.start = function() {
 };
 
 $(document).ready(function() {
-  var parag = new QuizController();
-  parag.start();
+  var qc = new QuizController();
+  qc.start();
 });
