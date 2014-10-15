@@ -11,7 +11,7 @@ quiz1 = Quiz.create(title: "Your Favorites")
 quiz1.questions.build(
   question_type: "multiple",
   question: "What's your favorite color?",
-  choices: "blue;pink;green;red",
+  choices: "blue;pink;green;hot-pink",
   answer: "blue"
 ).save
 
