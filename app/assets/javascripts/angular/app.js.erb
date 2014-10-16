@@ -9,5 +9,9 @@ app.config(function($routeProvider) {
     .when("/quiz/:id", {
       templateUrl: "<%= asset_path('/assets/angular/templates/questions.html') %>",
       controller: "QuestionsController"
+    })
+    .when("/score", {
+      templateUrl: "<%= asset_path('/assets/angular/templates/score.html') %>",
+      controller: "ScoreController"
     });
 });

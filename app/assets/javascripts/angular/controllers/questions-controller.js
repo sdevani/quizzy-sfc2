@@ -1,5 +1,5 @@
-app.controller('QuestionsController', ['$scope', 'Question', '$routeParams',
-  function($scope, Question, $routeParams) {
+app.controller('QuestionsController', ['$scope', 'Question', '$routeParams', 'Score', '$location',
+  function($scope, Question, $routeParams, Score, $location) {
     $scope.quizId = $routeParams.id;
     $scope.questionsViewShow = true;
     $scope.scoreViewShow = false;
@@ -9,8 +9,8 @@ app.controller('QuestionsController', ['$scope', 'Question', '$routeParams',
         quizzes[i].choices = quizzes[i].choices.split(';');
         $scope.question = $scope.questions[$scope.curQuestion]
       }
-      $scope.correctAnswers = 0;
-      $scope.totalQuestions = quizzes.length;
+      Score.correctAnswers = 0;
+      Score.totalQuestions = quizzes.length;
     });
     $scope.curQuestion = 0;
 
@@ -18,7 +18,7 @@ app.controller('QuestionsController', ['$scope', 'Question', '$routeParams',
       console.log(question);
       console.log(question.selection);
       if (question.answer == question.selection) {
-        $scope.correctAnswers++;
+        Score.correctAnswers++;
       }
 
       $scope.curQuestion += 1;
@@ -31,8 +31,7 @@ app.controller('QuestionsController', ['$scope', 'Question', '$routeParams',
     };
 
     $scope.showScore = function() {
-      $scope.questionsViewShow = false;
-      $scope.scoreViewShow = true;
+      $location.path('/score');
     }
   }
 ]);
