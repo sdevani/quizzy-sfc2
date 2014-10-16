@@ -1,6 +1,6 @@
 class QuestionsController < AJAXController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_quiz
+  before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # GET /questions
   # GET /questions.json
@@ -49,7 +49,7 @@ class QuestionsController < AJAXController
   # PATCH/PUT /questions/1.json
   def update
     if @question.update(question_params)
-      render json: { status: 200, entity: @question }
+      render json: @question
     else
       render json: @question.errors, status: :unprocessable_entity
     end
@@ -78,7 +78,7 @@ class QuestionsController < AJAXController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:question, :answer, :times_answered, :correct_answers, :quiz_id, :choices, :question_type)
+      params.permit(:question, :answer, :times_answered, :correct_answers, :quiz_id, :choices, :question_type)
     end
 
 end

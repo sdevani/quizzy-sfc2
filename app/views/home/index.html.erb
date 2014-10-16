@@ -1,3 +1,32 @@
-<h2>Quizzy Quiz</h2>
+<div ng-app="quizzyApp">
+  <div ng-controller="QuizController">
 
-<p>Your single page app should go here.</p>
+    <div ng-show="quizView">
+      <h3 ng-repeat="quiz in quizzes" ng-click="quizSelected(quiz)">
+        {{quiz.title}}
+      </h3>
+    </div>
+
+    <div ng-show="questionsView">
+       <h3>{{question.question}}</h3>
+      <form ng-submit="submitQuestion(question)">
+        <div ng-repeat="choice in question.choices">
+          <input type="radio" ng-model="question.selection" ng-value="choice">
+          <label>{{choice}}</label>
+        </div>
+        <input type="submit">
+      </form>
+
+      <h3>Update Question</h3>
+      <form ng-submit="updateQuestion()">
+      <input ng-model="question.question">
+        <input type="submit" value="Update">
+      </form>
+
+    </div>
+
+    <div ng-show="scoreView">
+      <h1>Your score is: {{(correctAnswers / totalQuestions)*100}}%</h1>
+    </div>
+  </div>
+</div>

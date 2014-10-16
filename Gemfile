@@ -44,3 +44,6 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'angular-gem'
+gem 'pry-byebug'
