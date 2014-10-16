@@ -1,16 +1,17 @@
 var ScoreModel = function(data) {
   this.user = data.user;
   this.score = data.score;
-  this.quizId = data.quiz_id;
+  this.quiz_id = data.quiz_id;
 };
 
-ScoreModel.createScore = function(score) {
+ScoreModel.createScore = function(data) {
   $.ajax({
     type: "post",
     url: "/scores",
-    data: new ScoreModel(score)
+    data: {score: data, quiz_id: data.quiz_id}
   })
     .done(function(data) {
+      console.log(data);
       $(document).trigger('show_score', data);
     });
 };

@@ -20,22 +20,22 @@ QuestionView.prototype.render = function(question) {
 QuestionView.prototype.callback = function() {
   var view = this;
   $('.question-choice').click(function(e){
-    if (view.currentQuestion === view.questions.length-1) {
-      $(document).trigger('post_score', view);
-    } else { 
-      var selected = $('input[type="radio"]:checked').val();
-      // potentially make a method for below for code cleanliness
-      if (selected === view.questions[view.currentQuestion].answer) {
-        view.correctAnswers++;
-        $('.validation').append('<p>CORRECT!!!!!!</p>');
-      } else {
-        $('.validation').append('<p>WRONGGGGG. SO WRONGGGGG. ARGH$@^@%@#%@</p>');
-      }
-      setTimeout(function() {
-        view.currentQuestion++;
-        view.render(view.questions[view.currentQuestion]);
-      } ,3000);
+    var selected = $('input[type="radio"]:checked').val();
+    if (selected === view.questions[view.currentQuestion].answer) {
+      view.correctAnswers++;
+      $('.validation').append('<p>CORRECT!!!!!!</p>');
+    } else {
+      $('.validation').append('<p>WRONGGGGG. SO WRONGGGGG. ARGH$@^@%@#%@</p>');
     }
+    
+    setTimeout(function() {
+      if (view.currentQuestion === view.questions.length-1) {
+        $(document).trigger('post_score', view.correctAnswers);
+      } else { 
+      view.currentQuestion++;
+      view.render(view.questions[view.currentQuestion]);
+    }
+    } ,1000);
   });
 };
 
