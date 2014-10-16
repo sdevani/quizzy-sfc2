@@ -12,8 +12,7 @@ var QuestionView = function(el) {
 
 QuestionView.prototype.render = function(question) {
   var compile = this.template(question);
-  $(this.el).empty();
-  $(this.el).append(compile);
+  $(this.el).empty().append(compile);
   this.callback();
 };
 
@@ -27,13 +26,12 @@ QuestionView.prototype.callback = function() {
     } else {
       $('.validation').append('<p>WRONGGGGG. SO WRONGGGGG. ARGH$@^@%@#%@</p>');
     }
-    
+
     setTimeout(function() {
       if (view.currentQuestion === view.questions.length-1) {
         $(document).trigger('post_score', view.correctAnswers);
       } else { 
-      view.currentQuestion++;
-      view.render(view.questions[view.currentQuestion]);
+      view.render(view.questions[++view.currentQuestion]);
     }
     } ,1000);
   });

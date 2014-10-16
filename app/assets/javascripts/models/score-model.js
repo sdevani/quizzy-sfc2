@@ -11,7 +11,6 @@ ScoreModel.createScore = function(data) {
     data: {score: data, quiz_id: data.quiz_id}
   })
     .done(function(data) {
-      console.log(data);
-      $(document).trigger('show_score', data);
+      $(document).trigger('show_score', new ScoreModel(data.entity));
     });
 };
