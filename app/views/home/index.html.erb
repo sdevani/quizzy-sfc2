@@ -1,24 +1,3 @@
 <div ng-app="quizzyApp">
-  <div ng-controller="QuizMenuController">
-    <div ng-show="quizViewShow">
-      <h3 ng-repeat="quiz in quizzes" ng-click="quizSelected(quiz)">
-        {{quiz.title}}
-      </h3>
-    </div>
-
-    <div ng-show="questionsViewShow">
-      <h3>{{question}}</h3>
-      <form ng-submit="submitQuestion(question)">
-        <div ng-repeat="choice in question.choices">
-          <label>{{choice}}</label>
-          <input type="radio" ng-model="question.selection" ng-value="choice">
-        </div>
-        <input type="submit">
-      </form>
-    </div>
-
-    <div ng-show="scoreViewShow">
-      <h1>Your score is: {{(correctAnswers / totalQuestions)*100}}%</h1>
-    </div>
-  </div>
+  <ng-view>
 </div>

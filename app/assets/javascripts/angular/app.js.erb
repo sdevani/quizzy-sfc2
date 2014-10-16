@@ -1,0 +1,13 @@
+var app = angular.module('quizzyApp', ['ngResource', 'ngRoute']);
+
+app.config(function($routeProvider) {
+  $routeProvider
+    .when("/", {
+      templateUrl: "<%= asset_path('/assets/angular/templates/quizzes.html') %>",
+      controller: "QuizMenuController"
+    })
+    .when("/quiz/:id", {
+      templateUrl: "<%= asset_path('/assets/angular/templates/questions.html') %>",
+      controller: "QuestionsController"
+    });
+});
