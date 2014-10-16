@@ -1,28 +1,43 @@
-app.controller('QuizMenuController', ['$scope', 'Quiz', function($scope, Quiz) {
-  // $scope.model = Quiz.get({id: 1});
-  $scope.model = Quiz.get({id: 1});
-  
-  $scope.quizViewShow = false;
-  $scope.questionsViewShow = true;
+app.controller('QuizMenuController', ['$scope', 'Quiz', 'Question',
+  function($scope, Quiz, Question) {
+  $scope.quizViewShow = true;
+  $scope.questionsViewShow = false;
+  $scope.scoreViewShow = false;
 
-  $scope.updateTitle = function() {
-    // Quiz;
-    $scope.model.title = "Who are you2?";
-    $scope.model.$update();
-    Quiz.query();
-    var quiz = Quiz.get();
-    quiz.$update();
-    quiz.$delete();
+  $scope.quizzes = Quiz.query();
 
-    var quiz = new Quiz({title: "My new title"});
-    quiz.$save();
-    console.log($scope.model);
+  $scope.quizSelected = function(quiz) {
+    $scope.quizViewShow = false;
+    $scope.questionsViewShow = true;
+    $scope.questions = Question.query({quizId: quiz.id}, function(quizzes) {
+      for (var i = 0; i < quizzes.length; i++) {
+        quizzes[i].choices = quizzes[i].choices.split(';');
+        $scope.question = $scope.questions[$scope.curQuestion]
+      }
+      $scope.correctAnswers = 0;
+      $scope.totalQuestions = quizzes.length;
+    });
+    $scope.curQuestion = 0;
   };
+
+  $scope.submitQuestion = function(question) {
+    console.log(question);
+    console.log(question.selection);
+    if (question.answer == question.selection) {
+      $scope.correctAnswers++;
+    }
+
+    $scope.curQuestion += 1;
+
+    if ($scope.curQuestion == $scope.questions.length) {
+      $scope.showScore();
+    } else {
+      $scope.question = $scope.questions[$scope.curQuestion];
+    }
+  };
+
+  $scope.showScore = function() {
+    $scope.questionsViewShow = false;
+    $scope.scoreViewShow = true;
+  }
 }]);
-
-
-// Quiz.query()
-// Quiz.get({id: 1})
-// quiz.$update();
-// quiz.$save();
-// quiz.$delete();
